@@ -45,5 +45,27 @@ class Role
   end
 
 
+  def self.delete_all()
+    sql = "DELETE FROM roles;"
+    SqlRunner.run(sql)
+  end
+
+
+  def update()
+    sql = "
+      UPDATE roles
+      SET
+        movie_id = $1,
+        actor_id = $2,
+        fee = $3
+      WHERE id = $4;
+    "
+
+    values = [@movie_id, @actor_id, @fee, @id]
+
+    SqlRunner.run(sql, values)
+  end
+
+
 
 end

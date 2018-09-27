@@ -4,9 +4,9 @@ require_relative("./models/role.rb")
 require_relative("./models/actor.rb")
 
 
-# Role.delete_all()
-# Movie.delete_all()
-# Actor.delete_all()
+Role.delete_all()
+Movie.delete_all()
+Actor.delete_all()
 
 
 actor1 = Actor.new({
