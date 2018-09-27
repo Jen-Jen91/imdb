@@ -14,7 +14,6 @@ class Role
 
 
   def save()
-
     sql = "
       INSERT INTO roles(
         movie_id,
@@ -30,11 +29,20 @@ class Role
     results = SqlRunner.run(sql, values)
 
     @id = results[0]["id"].to_i()
-
   end
 
 
+  def self.all()
+    sql = "SELECT * FROM roles;"
 
+    results = SqlRunner.run(sql)
+
+    roles = results.map do |role|
+      Role.new(role)
+    end
+
+    return roles
+  end
 
 
 

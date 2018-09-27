@@ -14,7 +14,6 @@ class Movie
 
 
   def save()
-
     sql = "
       INSERT INTO movies(
         title,
@@ -23,17 +22,26 @@ class Movie
       VALUES ($1, $2)
       RETURNING id;
     "
-
     values = [@title, @genre]
 
     results = SqlRunner.run(sql, values)
 
     @id = results[0]["id"].to_i()
-
   end
 
 
+  def self.all()
+    sql = "SELECT * FROM movies;"
 
+    results = SqlRunner.run(sql)
+
+    movies = results.map do |movie|
+      Movie.new(movie)
+    end
+
+    return movies
+
+  end
 
 
 
