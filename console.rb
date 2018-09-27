@@ -32,21 +32,24 @@ actor3.save()
 
 movie1 = Movie.new({
   "title" => "Star Wars: A New Hope",
-  "genre" => "sci-fi"
+  "genre" => "sci-fi",
+  "budget" => 5000
   })
 
 movie1.save()
 
 movie2 = Movie.new({
   "title" => "Raiders of the Lost Ark",
-  "genre" => "adventure"
+  "genre" => "adventure",
+  "budget" => 3000
   })
 
 movie2.save()
 
 movie3 = Movie.new({
   "title" => "The Shining",
-  "genre" => "horror"
+  "genre" => "horror",
+  "budget" => 4000
   })
 
 movie3.save()
@@ -54,7 +57,7 @@ movie3.save()
 role1 = Role.new({
   "movie_id" => movie1.id,
   "actor_id" => actor1.id,
-  "fee" => 1000000
+  "fee" => 1000
   })
 
 role1.save()
@@ -62,7 +65,7 @@ role1.save()
 role2 = Role.new({
   "movie_id" => movie1.id,
   "actor_id" => actor2.id,
-  "fee" => 900000
+  "fee" => 900
   })
 
 role2.save()
@@ -70,11 +73,18 @@ role2.save()
 role3 = Role.new({
   "movie_id" => movie3.id,
   "actor_id" => actor3.id,
-  "fee" => 1500000
+  "fee" => 1500
   })
 
 role3.save()
 
+role4 = Role.new({
+  "movie_id" => movie2.id,
+  "actor_id" => actor1.id,
+  "fee" => 1000
+  })
+
+role4.save()
 
 
 binding.pry

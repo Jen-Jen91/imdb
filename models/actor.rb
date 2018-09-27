@@ -79,6 +79,4 @@ class Actor
     return movies
   end
 
-
-
 end

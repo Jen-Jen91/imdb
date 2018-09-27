@@ -3,13 +3,14 @@ require_relative("../db/sql_runner.rb")
 class Movie
 
   attr_reader(:id)
-  attr_accessor(:title, :genre)
+  attr_accessor(:title, :genre, :budget)
 
 
   def initialize(options)
     @id = options["id"].to_i() if options["id"]
     @title = options["title"]
     @genre = options["genre"]
+    @budget = options["budget"].to_i()
   end
 
 
@@ -17,12 +18,13 @@ class Movie
     sql = "
       INSERT INTO movies(
         title,
-        genre
+        genre,
+        budget
       )
-      VALUES ($1, $2)
+      VALUES ($1, $2, $3)
       RETURNING id;
     "
-    values = [@title, @genre]
+    values = [@title, @genre, @budget]
 
     results = SqlRunner.run(sql, values)
 
@@ -52,11 +54,11 @@ class Movie
   def update()
     sql = "
       UPDATE movies
-      SET title = $1, genre = $2
-      WHERE id = $3;
+      SET title = $1, genre = $2, budget = $3
+      WHERE id = $4;
     "
 
-    values = [@title, @genre, @id]
+    values = [@title, @genre, @budget, @id]
 
     SqlRunner.run(sql, values)
   end
@@ -79,7 +81,21 @@ class Movie
   end
 
 
+  def remaining_budget()
+    sql = "
+      SELECT SUM(roles.fee) AS total_fee
+      FROM roles
+      WHERE movie_id = $1;
+      "
 
+    results = SqlRunner.run(sql, [@id])
+
+    fee = results[0]["total_fee"].to_i()
+
+    remaining_budget = @budget - fee
+
+    return remaining_budget
+  end
 
 
 end
