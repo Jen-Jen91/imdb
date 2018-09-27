@@ -1,4 +1,4 @@
-require("pg")
+require_relative("../db/sql_runner.rb")
 
 class Role
 
@@ -13,7 +13,25 @@ class Role
   end
 
 
+  def save()
 
+    sql = "
+      INSERT INTO roles(
+        movie_id,
+        actor_id,
+        fee
+      )
+      VALUES ($1, $2, $3)
+      RETURNING id;
+    "
+
+    values = [@movie_id, @actor_id, @fee]
+
+    results = SqlRunner.run(sql, values)
+
+    @id = results[0]["id"].to_i()
+
+  end
 
 
 
