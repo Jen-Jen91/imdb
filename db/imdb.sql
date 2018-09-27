@@ -6,7 +6,7 @@ DROP TABLE IF EXISTS actors;
 CREATE TABLE movies(
   id SERIAL8 PRIMARY KEY,
   title VARCHAR(255),
-  genre VARCHAR(255)
+  genre VARCHAR(255),
 );
 
 CREATE TABLE actors(
@@ -17,7 +17,7 @@ CREATE TABLE actors(
 
 CREATE TABLE roles(
   id SERIAL8 PRIMARY KEY,
-  actor_id INT8 REFERENCES actors(id) ON DELETE CASCADE,
   movie_id INT8 REFERENCES movies(id) ON DELETE CASCADE,
+  actor_id INT8 REFERENCES actors(id) ON DELETE CASCADE,
   fee INT8
 );

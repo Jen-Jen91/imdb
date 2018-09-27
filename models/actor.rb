@@ -63,6 +63,22 @@ class Actor
   end
 
 
+  def movies()
+    sql = "
+      SELECT movies.* FROM movies
+      INNER JOIN roles
+      ON movies.id = roles.movie_id
+      WHERE roles.actor_id = $1;
+    "
+    results = SqlRunner.run(sql, [@id])
+
+    movies = results.map do |movie|
+      Movie.new(movie)
+    end
+
+    return movies
+  end
+
 
 
 end
