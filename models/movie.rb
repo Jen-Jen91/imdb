@@ -97,5 +97,28 @@ class Movie
     return remaining_budget
   end
 
+# Or have set up two methods - one for roles, one for budget:
+
+  # def roles()
+  #   sql = "SELECT * FROM roles where movie_id = $1"
+  #   values = [@id]
+  #   roles_data = SqlRunner.run(sql, values)
+  #   return roles_data.map{|role| Role.new(role)}
+  # end
+  #
+  # def remaining_budget()
+  #   roles = self.roles()
+  #   role_fees = roles.map{|role| role.fee}
+  #   combined_fees = role_fees.sum
+  #   return @budget - combined_fees
+  # end
+
+
+
+  # def self.map_items(data)
+  #   result = data.map{|movie| Movie.new(movie)}
+  #   return result
+  # end
+
 
 end
