@@ -12,7 +12,6 @@ class Role
     @fee = options["fee"].to_i()
   end
 
-
   def save()
     sql = "
       INSERT INTO roles(
@@ -25,16 +24,12 @@ class Role
     "
 
     values = [@movie_id, @actor_id, @fee]
-
     results = SqlRunner.run(sql, values)
-
     @id = results[0]["id"].to_i()
   end
 
-
   def self.all()
     sql = "SELECT * FROM roles;"
-
     results = SqlRunner.run(sql)
 
     roles = results.map do |role|
@@ -44,12 +39,10 @@ class Role
     return roles
   end
 
-
   def self.delete_all()
     sql = "DELETE FROM roles;"
     SqlRunner.run(sql)
   end
-
 
   def update()
     sql = "
@@ -60,9 +53,7 @@ class Role
         fee = $3
       WHERE id = $4;
     "
-
     values = [@movie_id, @actor_id, @fee, @id]
-
     SqlRunner.run(sql, values)
   end
 
